@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 6.0.3.2 (Linux)"/>
+	<meta name="created" content="2018-04-29T09:44:04.159189341"/>
+	<meta name="changed" content="2018-04-29T13:39:47.444408037"/>
+	<style type="text/css">
+		@page { margin: 2cm }
+		p { margin-bottom: 0.25cm; line-height: 115% }
+		pre.cjk { font-family: "IPA Pゴシック", monospace }
+		pre.ctl { font-family: "Noto Sans Devanagari", monospace }
+		a:link { so-language: zxx }
+	</style>
+</head>
+<body lang="ja-JP" dir="ltr">
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Arch
+install manual(UEFI)</span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Dualboot
+with Windows</span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">ArchLinuxISO</span></font></font>をダウンロード<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">(<a href="https://www.archlinux.jp/download/)%E3%81%97%E3%81%A6">https://www.archlinux.jp/download/)</a></span></font></font><a href="https://www.archlinux.jp/download/)%E3%81%97%E3%81%A6">して</a></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">USB</span></font></font>メディアなどに焼く。</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">PC</span></font></font>に<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">USB</span></font></font>を指してインストールメディアを起動。</p>
+<p style="margin-bottom: 0cm; line-height: 100%">キーボードの設定</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>loadkeys
+jp106</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+ロケールの設定</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>nano
+/etc/locale.gen</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">&quot;<i><b>en_US.UTF-8_UTF-8</b></i>&quot;,
+&quot;<i><b>ja_JP.UTF-8_UTF-8</b></i>&quot;</span></font></font>のコメントアウトを外す。</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>locale-gen</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>export
+LANG=en_US.UTF-8</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%">インターネット接続</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>ping
+-c 3 <a href="http://www.google.com/">www.google.com</a></b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+必要があれば</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>ip
+link</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%">時計合わせ</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>timedatectl
+set-ntp true</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%">ドライブの確認</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>lsblk</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%">次にパーティションを分ける。</p>
+<p style="margin-bottom: 0cm; line-height: 100%">基本的には<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">/dev/sda*</span></font></font>などのように割り当てられている</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>cfdisk
+/dev/sda</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><img src="arch-i_html_41cfdacf699dbef3.png" name="Image1" align="left" width="584" height="329" border="0"/>
+<br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">/dev/sda</span></font></font>は先程<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">lsblk</span></font></font>で確認した自分の環境に合わせてください。</p>
+<p style="margin-bottom: 0cm; line-height: 100%">必要なパーティションは<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">swap,root,home,boot</span></font></font>です。</p>
+<p style="margin-bottom: 0cm; line-height: 100%">今回の場合<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">boot</span></font></font>は必要ありません。</p>
+<p style="margin-bottom: 0cm; line-height: 100%">空いているパーティションを<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">3</span></font></font>つに分割してください。</p>
+<p style="margin-bottom: 0cm; line-height: 100%">ここでは<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">swap=sda8,root=sda6,home=sda9,boot(UEFI)=sda3</span></font></font>です。</p>
+<p style="margin-bottom: 0cm; line-height: 100%">注意点としては<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Windows</span></font></font>や<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">UEFI</span></font></font>のパーティションを触らないことです。</p>
+<p style="margin-bottom: 0cm; line-height: 100%">パーテイションのフォーマットです</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>mkfs.ext4
+/dev/sda</b></i><i><b>6</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>mkfs.ext4
+/dev/sda9</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">sda6,9</span></font></font>は自分の<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">root</span></font></font>と<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">home</span></font></font>の数字にしてください</p>
+<p style="margin-bottom: 0cm; line-height: 100%">次に<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">swap</span></font></font>パーティションの有効化です</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>mkswap
+/dev/sda8</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>swapon
+/dev/sda</b></i><i><b>8</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">sda8</span></font></font>には自分の<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">swap</span></font></font>パーティションを入れる。</p>
+<p style="margin-bottom: 0cm; line-height: 100%">パーティションのマウント</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>mount
+/dev/sda6 /mnt</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>mkdir
+-p /mnt/boot/efi</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>mount
+/dev/sda3 /mnt/boot/efi</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>mkdir
+-p /mnt/home</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>mount
+/dev/sda9 /mnt/home</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+ベースシステムインストール</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+ミラーの選択</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>nano
+/etc/pacman.d/mirrorlist</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">jaist</span></font></font>の行を探して一番上に持ってくる</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+ベースシステムのインストール</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>pacstrap
+-i /mnt base base-devel</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">fstab</span></font></font>の生成</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>genfstab
+-U /mnt &gt;&gt; /mnt/etc/fstab</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>cat
+/mnt/etc/fstab</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">Chroot</span></font></font>とベースシステムの設定</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>arch-chroot
+/mnt /bin/bash</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+時間などの設定</p>
+<pre class="cjk"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime</b></i></span></font></font>
+<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>hwclock --systohc –utc</b></i></span></font></font>
+<font face="IPA明朝"><font size="3" style="font-size: 12pt">ロケールの設定</font></font></pre><p style="margin-bottom: 0cm; line-height: 100%">
+<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>nano
+/etc/locale.gen</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><font face="Nimbus Roman">&quot;</font><font face="Nimbus Roman"><b>en_US.UTF-8_UTF-8</b></font><font face="Nimbus Roman">&quot;,
+&quot;</font><font face="Nimbus Roman"><b>ja_JP.UTF-8_UTF-8</b></font><font face="Nimbus Roman">&quot;</font></span></font></font>のコメントアウトを外す<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><font face="Nimbus Roman">.</font></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>locale-gen</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>echo
+LANG=en_US.UTF-8 &gt; /etc/locale.conf</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>export
+LANG=en_US.UTF-8</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+キーボードの設定</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>nano
+/etc/vconsole.conf</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>KEYMAP=jp106</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>FONT=lat9w-16</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+ホストネームを設定します</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>echo
+**** &gt; /etc/hostname</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">****</span></font></font>は自分の好きなホストネームにしてください<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">.</span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+同じ名前を次にも設定します</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>nano
+/etc/hosts</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>127.0.0.1	localhost.localdomain		localhost</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>::1		localhost.localdomain		localhost</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>127.0.1.1	****.localdomain		****</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+有線を想定しているのでここではネットワーク設定をしません。</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+無線の場合は<font face="Nimbus Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><font face="Nimbus Roman">(</font><font color="#0066b3"><font face="Nimbus Roman"><u>h</u></font></font><a href="https://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A"><font color="#0066b3"><font face="Nimbus Roman"><u>ttps://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A</u></font></font></a><font face="Nimbus Roman">)</font></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+ルートパスワードの設定</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>passwd</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+ブートマネジャーの設定</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>pacman
+-S grub dosfstools efibootmgr</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>grub-install
+--arget=i386-efi --efi-directory=/boot/efi --bootloader-id=grub
+--recheck</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>mkdir
+/boot/efi/EFI/boot</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>cp
+/boot/efi/EFI/grub/grubx64.efi	/boot/efi/EFI/boot/bootx64.efi</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>grub-mkconfig
+-o /boot/grub/grub.cfg</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+ルートから抜ける。</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>exit</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+アンマウントする。</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>umount
+-R /mnt</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>reboot</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">USB</span></font></font>が動く前に<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">BIOS</span></font></font>を起動して</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">USB</span></font></font>を抜き<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">GRUB</span></font></font>の優先度を最上段にしてください</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+そして変更を保存して終了をして<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">GRUB</span></font></font>が起動したら成功です。</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">Intel</span></font></font>の<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">CPU</span></font></font>の場合は<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">intel-ucode</span></font></font>をインストールする必要があります<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">.</span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+失敗していた場合は、先の<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">sda*</span></font></font>パーティションをフォーマットとリマウントしてからもう一回インストールする必要があります。</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+ウィンドウマネージャーは自分の好みを入れてください。</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+また<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">Arch</span></font></font>は最小限で自分でカスタマイズするスタイルなので自分色の<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">Arch</span></font></font>環境を作りましょう<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">!</span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+私が使っているのは<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">Cinnamon</span></font></font>で他には<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">i3</span></font></font>など様々な種類がります。</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<img src="arch-i_html_218f0a94fb2769f8.png" name="Image2" align="left" width="614" height="345" border="0"/>
+<br/>
+
+</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+日本語環境は</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>nano
+/etc/locale.conf</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+で</p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="2" style="font-size: 10pt"><span lang="en-US"><b>LANG=ja_JP.UTF-8<br/>
+#
+LANG=en_US.UTF-8</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+上記のように書き換えます。</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+下記はウィンドウマネージャー<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">Cinnamon</span></font></font>を入れている場合です。</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+他のウィンドウマネージャーの場合は読み替えもしくは検索してください。</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">(</span></font></font>例：右下の<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">~</span></font></font>ドマーク→あなたのタスクバーのどこかにあるキーボードアイコン<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">)</span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+日本語入力環境は</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>pacman
+-S otf-ipafont fcitx fcitx-mozc</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><i><b>nano
+~/.xprofile</b></i></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+で</p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>export
+LANG=&quot;ja_JP.UTF-8&quot;</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>export
+XMODIFIRES=&quot;@im=fcitx&quot;</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>export
+XMODIFORE=&quot;@im=fcitx&quot;</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>export
+GTK_IM_MODULE=fcitx</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>export
+QT_IM_MODULE=fcitx</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; line-height: 100%"><font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>export
+DefaultIMModule=fcitx</b></span></font></font></p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+と書きます。</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+右下のタスクバーのキーボートマークを右クリックして入力メソッドを<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">Mozc</span></font></font>に変えるもしくは</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+キーボードアイコンをクリックもしくはキーボードの半角全角ボタンを押す。ことによって切り替わります。</p>
+<p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; line-height: 100%">
+動かない場合<font face="Nimbus Roman"><font size="3" style="font-size: 12pt"><span lang="en-US">reboot</span></font></font>もしくはログアウトしてから行ってみてください。</p>
+</body>
+</html>
