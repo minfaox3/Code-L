@@ -8,7 +8,7 @@ PCにUSBを指してインストールメディアを起動。
 ### loadkeys jp106
 # ロケールの設定
 ## nano /etc/locale.gen
-#### "en_US.UTF-8_UTF-8", "ja_JP.UTF-8_UTF-8"のコメントアウトを外す。
+##### "en_US.UTF-8_UTF-8", "ja_JP.UTF-8_UTF-8"のコメントアウトを外す。
 ## locale-gen
 ## export LANG=en_US.UTF-8
 # インターネット接続
