@@ -1,6 +1,7 @@
 # Arch install manual(UEFI)
 # Dualboot with Windows
 これのインストール方法に従った場合に起こったアクシデントは一切保証などを行いませんのでご了承ください。
+## Arch公式インストールガイド(https://wiki.archlinux.jp/index.php/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89 )
 #### ArchLinuxISOをダウンロード(https://www.archlinux.jp/download )して
 #### USBメディアなどに焼く。
 PCにUSBを指してインストールメディアを起動。
