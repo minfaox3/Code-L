@@ -7,18 +7,18 @@ PCにUSBを指してインストールメディアを起動。
 # キーボードの設定
 ### loadkeys jp106
 # ロケールの設定
-## nano /etc/locale.gen
+### nano /etc/locale.gen
 ##### "en_US.UTF-8_UTF-8", "ja_JP.UTF-8_UTF-8"のコメントアウトを外す。
-## locale-gen
-## export LANG=en_US.UTF-8
+### locale-gen
+### export LANG=en_US.UTF-8
 # インターネット接続
-## ping -c 3 www.google.com
+### ping -c 3 www.google.com
 必要があれば
-## ip link
+### ip link
 # 時計合わせ
-## timedatectl set-ntp true
+### timedatectl set-ntp true
 # ドライブの確認
-## lsblk
+### lsblk
 # 次にパーティションを分ける。
 基本的には/dev/sda*などのように割り当てられている
 ### cfdisk /dev/sda
@@ -29,39 +29,39 @@ PCにUSBを指してインストールメディアを起動。
 ここではswap=sda8,root=sda6,home=sda9,boot(UEFI)=sda3です。
 注意点としてはWindowsやUEFIのパーティションを触らないことです。
 パーテイションのフォーマットです
-## mkfs.ext4 /dev/sda6
-## mkfs.ext4 /dev/sda9
+### mkfs.ext4 /dev/sda6
+### mkfs.ext4 /dev/sda9
 sda6,9は自分のrootとhomeの数字にしてください
 # 次にswapパーティションの有効化です
-## mkswap /dev/sda8
-## swapon /dev/sda8
+### mkswap /dev/sda8
+### swapon /dev/sda8
 sda8には自分のswapパーティションを入れる。
 # パーティションのマウント
-## mount /dev/sda6 /mnt
-## mkdir -p /mnt/boot/efi
-## mount /dev/sda3 /mnt/boot/efi
-## mkdir -p /mnt/home
-## mount /dev/sda9 /mnt/home
-## ベースシステムインストール
+### mount /dev/sda6 /mnt
+### mkdir -p /mnt/boot/efi
+### mount /dev/sda3 /mnt/boot/efi
+### mkdir -p /mnt/home
+### mount /dev/sda9 /mnt/home
+# ベースシステムインストール
 # ミラーの選択
-## nano /etc/pacman.d/mirrorlist
+### nano /etc/pacman.d/mirrorlist
 #### jaistの行を探して一番上に持ってくる
 # ベースシステムのインストール
-## pacstrap -i /mnt base base-devel
+### pacstrap -i /mnt base base-devel
 # fstabの生成
-## genfstab -U /mnt >> /mnt/etc/fstab
-## cat /mnt/etc/fstab
+### genfstab -U /mnt >> /mnt/etc/fstab
+### cat /mnt/etc/fstab
 # Chrootとベースシステムの設定
-## arch-chroot /mnt /bin/bash
+### arch-chroot /mnt /bin/bash
 # 時間などの設定
-## ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-## hwclock --systohc –utc
+### ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+### hwclock --systohc –utc
 # ロケールの設定
-## nano /etc/locale.gen
+### nano /etc/locale.gen
 #### "en_US.UTF-8_UTF-8", "ja_JP.UTF-8_UTF-8"のコメントアウトを外す.
-## locale-gen
-## echo LANG=en_US.UTF-8 > /etc/locale.conf
-## export LANG=en_US.UTF-8
+### locale-gen
+### echo LANG=en_US.UTF-8 > /etc/locale.conf
+### export LANG=en_US.UTF-8
 # キーボードの設定
 ## nano /etc/vconsole.conf
 #### KEYMAP=jp106
