@@ -28,6 +28,7 @@ PCにUSBを指してインストールメディアを起動。
 /dev/sdaは先程lsblkで確認した自分の環境に合わせてください。
 必要なパーティションはswap,root,home,bootです。
 今回の場合bootは必要ありません。
+#### RAMが2GB以上あるならswapは基本的に必要ないのでswap関連のコマンドは打たなくて良いです。またパーティションも必要ないです。(環境によってはswapを作ると逆に遅くなる可能性があります)
 空いているパーティションを3つに分割してください。
 ここではswap=sda8,root=sda6,home=sda9,boot(UEFI)=sda3です。
 注意点としてはWindowsやUEFIのパーティションを触らないことです。
@@ -82,13 +83,16 @@ sda8には自分のswapパーティションを入れる。
 # ルートパスワードの設定
 ### passwd
 #### IntelのCPUの場合はintel-ucodeもインストールする必要があります.
+### sudo pacman -S intel-ucode
 # ブートマネジャーの設定
 HPのPCならばi386-efiがx86_64-efiに。
 わかりやすい紹介(https://qiita.com/Gen_Arch/items/da296b7cbe5d87abc5a4#grub%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 ### pacman -S grub dosfstools efibootmgr
 ### grub-install --target=i386-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
 ### mkdir /boot/efi/EFI/boot
+もう作成されている場合はエラーを吐きます。そのまま続けてください
 ### cp /boot/efi/EFI/grub/grubx64.efi	/boot/efi/EFI/boot/bootx64.efi
+grubx64.efiがない場合はls /boot/efi/EFI/grubで確認してそこにあるものを書いてください(grub.efi等)
 ### grub-mkconfig -o /boot/grub/grub.cfg
 ルートから抜ける。
 ### exit
