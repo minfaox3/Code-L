@@ -1,6 +1,7 @@
 # Arch install manual(UEFI)
 # Dualboot with Windows
 これのインストール方法に従った場合に起こったアクシデントは一切保証などを行いませんのでご了承ください。
+自分のためのメモのため
 #### Arch公式インストールガイド(https://wiki.archlinux.jp/index.php/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89 )
 ##
 #### ArchLinuxISOをダウンロード(https://www.archlinux.jp/download )して
@@ -80,6 +81,7 @@ sda8には自分のswapパーティションを入れる。
 無線の場合は(https://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A)
 # ルートパスワードの設定
 ### passwd
+#### IntelのCPUの場合はintel-ucodeもインストールする必要があります.
 # ブートマネジャーの設定
 HPのPCならばi386-efiがx86_64-efiに
 わかりやすい紹介(https://qiita.com/Gen_Arch/items/da296b7cbe5d87abc5a4#grub%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
@@ -97,7 +99,6 @@ USBが動く前にBIOSを起動して
 #### USBを抜きGRUBの優先度を最上段にしてください
 #### そして変更を保存して終了をしてGRUBが起動したら成功です。
 
-### IntelのCPUの場合はintel-ucodeをインストールする必要があります.
 失敗していた場合は、先のsda*パーティションをフォーマットとリマウントしてからもう一回インストールする必要があります。
 ウィンドウマネージャーは自分の好みを入れてください。
 またArchは最小限で自分でカスタマイズするスタイルなので自分色のArch環境を作りましょう!
