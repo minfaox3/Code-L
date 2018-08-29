@@ -82,7 +82,7 @@ sda8には自分のswapパーティションを入れる。
 無線の場合は(https://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A)
 # ルートパスワードの設定
 ### passwd
-#### IntelのCPUの場合はintel-ucodeもインストールする必要があります.
+# IntelのCPUの場合はintel-ucodeもインストールする必要があります.
 ### sudo pacman -S intel-ucode
 # ブートマネジャーの設定
 HPのPCならばi386-efiがx86_64-efiに。
