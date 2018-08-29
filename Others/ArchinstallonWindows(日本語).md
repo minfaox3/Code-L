@@ -83,7 +83,7 @@ sda8には自分のswapパーティションを入れる。
 ### passwd
 #### IntelのCPUの場合はintel-ucodeもインストールする必要があります.
 # ブートマネジャーの設定
-HPのPCならばi386-efiがx86_64-efiに
+HPのPCならばi386-efiがx86_64-efiに。
 わかりやすい紹介(https://qiita.com/Gen_Arch/items/da296b7cbe5d87abc5a4#grub%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 ### pacman -S grub dosfstools efibootmgr
 ### grub-install --target=i386-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
