@@ -1,0 +1,19 @@
+call plug#begin('~/.vim/plugged')
+	Plug 'tomasr/molokai'
+call plug#end()
+set title
+set number
+set exrc
+set secure
+set showmatch
+set nowritebackup
+set nobackup
+syntax on
+set smartindent
+set wrapscan
+set backspace=indent,eol,start
+set clipboard=unnamed,autoselect
+set mouse=a
+set hidden
+set history=10000
+colorscheme molokai
