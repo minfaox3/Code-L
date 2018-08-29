@@ -57,7 +57,7 @@ sda8には自分のswapパーティションを入れる。
 ### arch-chroot /mnt /bin/bash
 # 時間などの設定
 ### ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-### hwclock --systohc –utc
+### hwclock --systohc –-utc
 # ロケールの設定
 ### nano /etc/locale.gen
 #### "en_US.UTF-8_UTF-8", "ja_JP.UTF-8_UTF-8"のコメントアウトを外す.
@@ -81,8 +81,10 @@ sda8には自分のswapパーティションを入れる。
 # ルートパスワードの設定
 ### passwd
 # ブートマネジャーの設定
+HPのPCならばi386-efiがx86_64-efiに
+わかりやすい紹介(https://qiita.com/Gen_Arch/items/da296b7cbe5d87abc5a4#grub%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 ### pacman -S grub dosfstools efibootmgr
-### grub-install --arget=i386-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
+### grub-install --target=i386-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
 ### mkdir /boot/efi/EFI/boot
 ### cp /boot/efi/EFI/grub/grubx64.efi	/boot/efi/EFI/boot/bootx64.efi
 ### grub-mkconfig -o /boot/grub/grub.cfg
