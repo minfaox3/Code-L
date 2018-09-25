@@ -124,13 +124,13 @@ USBが動く前にBIOSを起動して
 #### #LANG=en_US.UTF-8
 上記のように書き換えます。
 
-### 私はCinnamonを入れるときは下記ページを参考にして入れました
+### 私はCinnamonもといGUI環境の作成は下記ページを参考にして入れました
 #### https://www.linuxhelp.com/how-to-install-cinnamon-desktop-gui-in-arch-linux/
 
 下記はウィンドウマネージャーCinnamonを入れている場合です。
 他のウィンドウマネージャーの場合は読み替えもしくは検索してください。
 (例：右下の~ドマーク→あなたのタスクバーのどこかにあるキーボードアイコン)
-日本語入力環境は
+日本語入力環境は（忘れたのであっている保証なし）
 ### pacman -S otf-ipafont fcitx fcitx-mozc
 ### nano ~/.xprofile
 で
