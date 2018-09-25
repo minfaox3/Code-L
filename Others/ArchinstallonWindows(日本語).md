@@ -108,6 +108,12 @@ USBが動く前にBIOSを起動して
 またArchは最小限で自分でカスタマイズするスタイルなので自分色のArch環境を作りましょう!
 私が使っているのはCinnamonで他にはi3など様々な種類がります。
 
+# 再起動時のインターネット設定
+
+### ip link
+有線のを探す。ここではenp2s0
+### ip link set enp2s0 up
+
 # 日本語環境は
 ### nano /etc/locale.conf
 で
