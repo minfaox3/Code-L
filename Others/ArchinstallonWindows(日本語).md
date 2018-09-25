@@ -83,7 +83,7 @@ sda8には自分のswapパーティションを入れる。
 # ルートパスワードの設定
 ### passwd
 # IntelのCPUの場合はintel-ucodeもインストールする必要があります.
-### sudo pacman -S intel-ucode
+### pacman -S intel-ucode
 # ブートマネジャーの設定
 HPのPCならばi386-efiがx86_64-efiに。
 最近のPCはx86_64-efiが多いです
