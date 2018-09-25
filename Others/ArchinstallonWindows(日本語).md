@@ -117,15 +117,15 @@ USBが動く前にBIOSを起動して
 動作確認
 ### ping -c 3 www.google.com
 
+# 私はCinnamonもといGUI環境の作成は下記ページを参考にして入れました
+### https://www.linuxhelp.com/how-to-install-cinnamon-desktop-gui-in-arch-linux/
+
 # 日本語環境は
 ### nano /etc/locale.conf
 で
 #### LANG=ja_JP.UTF-8
 #### #LANG=en_US.UTF-8
 上記のように書き換えます。
-
-### 私はCinnamonもといGUI環境の作成は下記ページを参考にして入れました
-#### https://www.linuxhelp.com/how-to-install-cinnamon-desktop-gui-in-arch-linux/
 
 下記はウィンドウマネージャーCinnamonを入れている場合です。
 他のウィンドウマネージャーの場合は読み替えもしくは検索してください。
