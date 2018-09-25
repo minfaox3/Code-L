@@ -113,6 +113,9 @@ USBが動く前にBIOSを起動して
 ### ip link
 有線のを探す。ここではenp2s0
 ### ip link set enp2s0 up
+### dhcpcd enp2s0
+動作確認
+### ping -c 3 www.google.com
 
 # 日本語環境は
 ### nano /etc/locale.conf
