@@ -85,14 +85,14 @@ sda8には自分のswapパーティションを入れる。
 # IntelのCPUの場合はintel-ucodeもインストールする必要があります.
 ### pacman -S intel-ucode
 # ブートマネジャーの設定
-HPのPCならばi386-efiがx86_64-efiに。
-最近のPCはx86_64-efiが多いです
+最近のPCはx86_64-efiが多いです。他はi386-efi
 ### pacman -S grub dosfstools efibootmgr
-### grub-install --target=i386-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
+### grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
 ### mkdir /boot/efi/EFI/boot
 もう作成されている場合はエラーを吐きます。そのまま続けてください
 ### cp /boot/efi/EFI/grub/grubx64.efi	/boot/efi/EFI/boot/bootx64.efi
 grubx64.efiがない場合はls /boot/efi/EFI/grubで確認してそこにあるものを書いてください(grub.efi等)
+i386の場合は生成されません
 ### grub-mkconfig -o /boot/grub/grub.cfg
 ルートから抜ける。
 ### exit
