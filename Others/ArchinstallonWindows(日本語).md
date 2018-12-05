@@ -26,7 +26,7 @@ PCにUSBを指してインストールメディアを起動。
 基本的には/dev/sda*などのように割り当てられている
 ### cfdisk /dev/sda
 /dev/sdaは先程lsblkで確認した自分の環境に合わせてください。
-必要なパーティションはswap,root,home,bootです。
+必要なパーティションは(swap),root,home,bootです。
 今回の場合bootは必要ありません。
 #### RAMが2GB以上あるならswapは基本的に必要ないのでswap関連のコマンドは打たなくて良いです。またパーティションも必要ないです。(環境によってはswapを作ると逆に遅くなる可能性があります)
 空いているパーティションを3つに分割してください。
@@ -36,7 +36,7 @@ PCにUSBを指してインストールメディアを起動。
 ### mkfs.ext4 /dev/sda6
 ### mkfs.ext4 /dev/sda9
 sda6,9は自分のrootとhomeの数字にしてください
-# 次にswapパーティションの有効化です
+# 次にswapパーティションの有効化です(swapパーティションを作成した場合)
 ### mkswap /dev/sda8
 ### swapon /dev/sda8
 sda8には自分のswapパーティションを入れる。
