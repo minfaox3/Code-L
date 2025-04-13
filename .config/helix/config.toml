@@ -1,0 +1,8 @@
+theme = "base16_transparent"
+
+[keys.insert]
+"S-left" = "extend_char_left"
+"S-right" = "extend_char_right"
+"S-up" = "extend_line_up"
+"S-down" = "extend_line_down"
+"C-V" = "paste_after"

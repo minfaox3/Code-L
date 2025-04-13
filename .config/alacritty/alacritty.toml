@@ -1,0 +1,18 @@
+[terminal]
+shell =  {program = "/opt/homebrew/bin/tmux", args = ["attach",]}
+
+[general]
+live_config_reload = true
+import = [
+    "~/.config/alacritty/themes/themes/Cobalt2.toml"
+]
+
+[mouse]
+hide_when_typing = true
+
+[window]
+decorations = "Buttonless"
+opacity = 0.8
+
+[font]
+normal = {family="JetBrainsMono Nerd Font", style="Regular"}
